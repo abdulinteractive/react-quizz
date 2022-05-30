@@ -18,7 +18,7 @@ const Question = ({
   const [error, setError] = useState(false);
 
   const navigate = useNavigate();
-
+console.log(correct,'correct' );
   const handleSelect = (i) => {
     if (selected === i && selected === correct) return "select";
     else if (selected === i && selected !== correct) return "wrong";
@@ -32,7 +32,7 @@ const Question = ({
   };
 
   const handleNext = () => {
-    if (currQues > 8) {
+    if (currQues == questions.length-1) {
       navigate("/result");
     } else if (selected) {
       setCurrQues(currQues + 1);
@@ -56,12 +56,12 @@ const Question = ({
           {options &&
             options.map((i) => (
               <button
-                className={`singleOption  ${selected && handleSelect(i)}`}
-                key={i}
-                onClick={() => handleCheck(i)}
+                className={`singleOption  ${selected && handleSelect(i.option)}`}
+                key={i.option}
+                onClick={() => handleCheck(i.option)}
                 disabled={selected}
               >
-                {i}
+                {i.option}
               </button>
             ))}
         </div>

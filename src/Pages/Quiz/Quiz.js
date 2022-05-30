@@ -11,8 +11,7 @@ const Quiz = ({ name, questions, score, setScore, setQuestions }) => {
     setOptions(
       questions &&
         handleShuffle([
-          questions[currQues]?.correct_answer,
-          ...questions[currQues]?.incorrect_answers,
+          questions[currQues]?.options
         ])
     );
   }, [currQues, questions]);
@@ -30,9 +29,8 @@ const Quiz = ({ name, questions, score, setScore, setQuestions }) => {
       {questions ? (
         <>
           <div className="quizInfo">
-            <span>{questions[currQues].category}</span>
+            <span>{questions[currQues].subject}</span>
             <span>
-              {/* {questions[currQues].difficulty} */}
               Score : {score}
             </span>
           </div>
@@ -40,8 +38,8 @@ const Quiz = ({ name, questions, score, setScore, setQuestions }) => {
             currQues={currQues}
             setCurrQues={setCurrQues}
             questions={questions}
-            options={options}
-            correct={questions[currQues]?.correct_answer}
+            options={questions[currQues].options}
+            correct={questions[currQues]?.options.filter(x=>x.correct===true)[0].option}
             score={score}
             setScore={setScore}
             setQuestions={setQuestions}
